@@ -13,7 +13,10 @@ package com.mycompany.helloworld;
  */
 public class HelloWorld {
 
+    public static float MAX_VALUE;
+    double y;
     public static void main(String[] args) {
         System.out.println("Hello Elizabeth!");
+        System.out.println(MAX_VALUE);
     }
 }
