@@ -11,31 +11,32 @@ import java.util.Scanner;
  * @author John
  */
 public class UserActions {
+    private static UserIO run = new UserIOImplementation();
     private static double operandOne, operandTwo;
     private static Scanner input = new Scanner(System.in);
     private static final String EXIT = "exit";
     private static final boolean CONTROL = true;
 
     //Checks if user has keyed in the exit code
-    public static void exitCheck(String x){
+    protected static void exitCheck(String x){
         boolean jumpOut = false;
         //x = input.nextLine();
         if(x.equals(EXIT)){
-            System.out.print("Thank you, goodbye.\n");
+            run.print("Thank you, goodbye.\n");
                 System.exit(0);
         }
         //return jumpOut;
     }
     //prompts the user for their inputs and validates given inputs    
-    public static String getChoice(){
+    protected static <T>String getChoice(){
         int attempts = 1;
         String choice, exitCheck;
         boolean isValid = false, shouldRun = false;
-        System.out.print("This is a simple calculator. Please follow the "
+        run.print("This is a simple calculator. Please follow the "
                     + "prompts to perform calculations.\nEnter 'exit' anytime "
                     + "to terminate the program.\n");
         
-            System.out.print("Please enter a value for the first operand: ");
+            run.print("Please enter a value for the first operand: ");
             exitCheck = input.nextLine();
             exitCheck(exitCheck);
                 do{
@@ -44,13 +45,13 @@ public class UserActions {
                         operandOne = Double.parseDouble(exitCheck);
                         shouldRun = true;
                     }catch(NumberFormatException e){
-                        System.out.print("Sorry, that was an invalid entry."
+                        run.print("Sorry, that was an invalid entry."
                                 + " Please enter a numeric value. ");
                         exitCheck = input.nextLine();
                         }
                     }while(!shouldRun);
             shouldRun = false;
-            System.out.print("Please enter a value for the second operand: ");
+            run.print("Please enter a value for the second operand: ");
             exitCheck = input.nextLine();
             exitCheck(exitCheck);
             do{
@@ -68,7 +69,7 @@ public class UserActions {
          /* }catch(NumberFormatException e){
               System.out.print("Sorry, these values must be numeric.");
           }*/
-            System.out.print("Would you like to multiply, divide, add "
+            run.print("Would you like to multiply, divide, add "
                         + "or subtract? ");        
             do{
                 choice = input.nextLine();
@@ -77,11 +78,11 @@ public class UserActions {
                         || choice.equals("add") || choice.equals("subtract")){
                     isValid = true;
                 }else if(attempts > 4){
-                    System.out.println("Sorry, you have entered too many "
-                            + "invalid entries. Goodbye.");
+                    run.print("Sorry, you have entered too many "
+                            + "invalid entries. Goodbye.\n");
                     System.exit(0);
                 }else{
-                    System.out.print("Sorry that was not a valid option. Would you like "
+                    run.print("Sorry that was not a valid option. Would you like "
                             + "to 'multiply', 'divide', 'add' "
                         + "or 'subtract'? ");
                     attempts++;
@@ -91,8 +92,8 @@ public class UserActions {
                     }*/
                 }
             }while(!isValid);
-            System.out.println("Operand 1 = "+operandOne+", operand two "
-                       + "= "+operandTwo+".");
+            run.print("Operand 1 = "+operandOne+", operand two "
+                       + "= "+operandTwo+".\n");
         return choice;
     }
     //Does the necessary calculations using SimpleCalculator class methods
@@ -104,12 +105,12 @@ public class UserActions {
            String divByZero = "";
            switch(getChoice()){
                 case "multiply" :
-                    System.out.print("Multiplication:\nProduct = "
+                    run.print("Multiplication:\nProduct = "
                             +SimpleCalculator.multiply(operandOne,operandTwo)+"\n");
                     break;
                 case "divide" :
                     if(operandTwo == 0){
-                        System.out.print("Are you sure you want to divide by "
+                        run.print("Are you sure you want to divide by "
                                 + "zero? Y/N ");
                         divByZero = input.nextLine();
                         exitCheck(divByZero);
@@ -117,27 +118,27 @@ public class UserActions {
                             /*as all values are read as doubles this will return
                              *  a quotient of 'Infinity'
                              */
-                            System.out.print("Division:\nQuotient = "
+                            run.print("Division:\nQuotient = "
                                 +SimpleCalculator.divide(operandOne,operandTwo)+"\n");
                         }else if(divByZero.equals("N")){
-                            System.out.println("Division by 0 aborted. Goodbye.");
+                            run.print("Division by 0 aborted. Goodbye.\n");
                             System.exit(0);
                         }else{
-                            System.out.print("Sorry, you have entered an invalid "
+                            run.print("Sorry, you have entered an invalid "
                                     + "option. Goodbye");
                             System.exit(9);
                         }
                     }else{
-                        System.out.print("Division:\nQuotient = "
+                        run.print("Division:\nQuotient = "
                             +SimpleCalculator.divide(operandOne,operandTwo)+"\n");
                     }
                     break;
                 case "add" :
-                   System.out.print("Addition:\nSum = "
+                   run.print("Addition:\nSum = "
                             +SimpleCalculator.add(operandOne,operandTwo)+"\n");
                     break;
                 case "subtract" :
-                   System.out.print("Subtraction:\nDifference = "
+                   run.print("Subtraction:\nDifference = "
                             +SimpleCalculator.subtract(operandOne,operandTwo)+"\n");
                     break;
                 default :

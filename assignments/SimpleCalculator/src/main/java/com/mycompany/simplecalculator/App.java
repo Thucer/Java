@@ -13,7 +13,6 @@ import java.util.Scanner;
  * @author John
  */
 public class App {
-
     private static final boolean CONTROL = true;
 
     

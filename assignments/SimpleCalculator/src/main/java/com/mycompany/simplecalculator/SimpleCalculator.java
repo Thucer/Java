@@ -12,7 +12,7 @@ package com.mycompany.simplecalculator;
  * @author John
  */
 public class SimpleCalculator {
-    public static double add(double x, double y){
+    public static <T> double add(double x, double y){
         double sum = x + y;
         return sum;
     }
