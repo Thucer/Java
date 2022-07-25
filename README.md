@@ -1,2 +1,3 @@
-# WileyJava
-Java basics course
+# JavaOLD
+Some basic java exercises
+
