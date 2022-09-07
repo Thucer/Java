@@ -1,3 +1,3 @@
-# JavaOLD
+# Java
 Some java exercises
 
